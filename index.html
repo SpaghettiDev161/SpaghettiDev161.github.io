@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Image Generator</title>
+
+  <!-- External Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/fabric@4.6.0/dist/fabric.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css">
+
+  <!-- Custom Styles -->
+  <style>
+    /* Global Dark Mode for the website */
+    body {
+      background-color: #121212; /* Dark background */
+      color: #e0e0e0; /* Light text */
+      font-family: Helvetica, sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+
+    /* Container for the content */
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      background-color: #1c1c1c; /* Dark container */
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: row; /* Default row layout */
+      gap: 20px; /* Space between canvas and input section */
+    }
+
+    /* Canvas styling */
+    #myCanvas {
+      border: 2px solid #ffffff; 
+      width: 500px; 
+      height: 625px;
+    }
+
+    .input-group {
+      flex: 1; /* Input group grows */
+      display: flex;
+      flex-direction: column; /* Stack inputs vertically */
+    }
+
+    /* Input styling */
+    input, textarea {
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+    }
+
+    textarea {
+      width: 100%;
+    }
+
+    /* Responsive design for mobile */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column; /* Stack vertically on mobile */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Container for content -->
+  <div class="container">
+    <!-- Canvas for custom image -->
+    <canvas id="myCanvas" width="500" height="625"></canvas>
+
+    <!-- Input Section for Image and Text -->
+    <div class="input-group">
+      <input type="file" id="imageInput" class="mb-2 w-full bg-gray-800 text-white">
+      <textarea id="textInput" placeholder="Zitat" rows="6" class="mb-2 w-full bg-gray-800 text-white"></textarea>
+      <input type="text" id="nameInput" placeholder="Name" class="mb-2 w-full bg-gray-800 text-white">
+      <input type="text" id="placeInput" placeholder="Ort" class="mb-2 w-full bg-gray-800 text-white">
+      <input type="date" id="dateInput" class="mb-2 w-full bg-gray-800 text-white">
+      <input type="text" id="sourceURLInput" placeholder="Quelle (URL)" class="mb-2 w-full bg-gray-800 text-white">
+      <textarea id="additionalText" placeholder="Weitere Informationen" rows="4" class="mb-2 w-full bg-gray-800 text-white"></textarea>
+      
+      <!-- Action Buttons -->
+      <button id="refreshBtn" class="bg-blue-500 text-white p-2 mt-4 rounded">Refresh</button>
+      <button id="downloadBtn" class="bg-green-500 text-white p-2 mt-4 rounded">Download PNG</button>
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+
+  <!-- Usage Note for External Scripts -->
+  <footer style="margin-top: 2rem; color: #e0e0e0; font-size: 0.9rem; text-align: center;">
+    <p><strong>External Scripts Used:</strong></p>
+    <ul>
+      <li><a href="https://cdn.jsdelivr.net/npm/fabric@4.6.0/dist/fabric.min.js" target="_blank">Fabric.js</a>: A powerful canvas library used for drawing and manipulating images.</li>
+      <li><a href="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js" target="_blank">QRCode.js</a>: A JavaScript library for generating QR codes.</li>
+      <li><a href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" target="_blank">Tailwind CSS</a>: A utility-first CSS framework used for styling.</li>
+    </ul>
+    <p><strong>Data Connected:</strong></p>
+    <ul>
+      <li>User-uploaded images</li>
+      <li>Text data from the inputs (e.g., Name, Quote, Place, etc.)</li>
+      <li>URL data provided by the user for citing sources</li>
+    </ul>
+    <p><em>Note: External libraries are used for rendering the canvas and generating QR codes, while input data is processed locally on the user's browser. No personal data is sent to external servers.</em></p>
+  </footer>
+</body>
+</html>
