@@ -1,7 +1,7 @@
 const canvas = new fabric.Canvas('myCanvas');
 const internalWidth = 1000;
 const internalHeight = 1250;
-const scaleFactor = 2;  // For retina displays
+const scaleFactor = 2;
 
 canvas.setWidth(internalWidth);
 canvas.setHeight(internalHeight);
@@ -13,7 +13,7 @@ canvas.setDimensions({
 const footerHeight = 100;
 const logoURL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/AfD_Logo_2021.svg/2560px-AfD_Logo_2021.svg.png';
 let text, nameText, nameBackground; // Text references
-let canvasSourceURL = '', qrCodeData = ''; // Other data variables
+let canvasSourceURL = '', qrCodeData = '', uploadedImage = null; // Other data variables
 
 const inputs = {
   textInput: document.getElementById('textInput'),
@@ -214,6 +214,11 @@ function loadImage() {
 
   const reader = new FileReader();
   reader.onload = function (event) {
+    if (uploadedImage) {
+      canvas.remove(uploadedImage);
+      uploadedImage = null;
+    }
+
     fabric.Image.fromURL(event.target.result, function(img) {
       const maxWidth = canvas.width * 0.8;
       const maxHeight = canvas.height * 0.6;
@@ -232,6 +237,7 @@ function loadImage() {
 
       canvas.add(img);
       img.sendToBack();
+      uploadedImage = img;
 
       img.on('moving', function() {
         img.sendToBack();
@@ -242,6 +248,7 @@ function loadImage() {
   };
   reader.readAsDataURL(file);
 }
+
 
 function renderFooterElements() {
   const { sourceURLInput, dateInput, placeInput } = inputs;
